@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using MyFirstWebAPI.Data;
+
 namespace MyFirstWebAPI
 {
     public class Program
@@ -13,6 +16,16 @@ namespace MyFirstWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // start
+
+            // builder.Services.AddDbContext<Data.ApplicationDbContext>(options => options.UseSqlServer)
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+
+            );
+
+            // end
 
             var app = builder.Build();
 
